@@ -1,0 +1,48 @@
+[alias]
+	co = checkout
+	br = branch
+	brd = branch -d
+	brD = branch -D
+	brl = branch -l
+	ci = commit
+	st = status
+	sa = stash
+	sa-l = stash list
+	mt = mergetool
+	dt = difftool
+	psm = push origin master
+	psd = push origin develop
+	plm = pull origin master
+	pld = pull origin develop
+	load = log --oneline --decorate --graph --all
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[core]
+	editor = subl -w
+	excludesfile = /Users/du/.gitignore_global
+[user]
+	name = Hivan Du
+	email = ivandoo75@gmail.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Volument/data/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = matching
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
